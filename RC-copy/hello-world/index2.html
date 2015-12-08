@@ -1,0 +1,36 @@
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js" ></script>
+</head>
+
+<body>
+
+</body>
+
+<script type="text/jsx">
+
+//Define a 'class'.  Describes form & function of the component we are creating
+//Widget/component that must be instantiated
+//Think of this as a cookie cutter.  It makes things that can be rendered in HTML
+//Can't eat a cookie cutter.  Similar, can only use what this makes ... not the unit itself
+//Cookie cut cannot be used in HTML.  But, its creations can be used/rendered in HTML
+
+var HelloWorld = React.createClass({
+	render: function(){
+		return <div>
+		Hello World from React!
+		</div>
+	}
+});
+
+//React, plz render this class (make use of the cookie cutter)
+
+var element = React.createElement(HelloWorld);
+
+//React, after you render this class, plz place in my body tag
+// ... use in HTML what the class above/cookie cutter, creates
+//.render(instance-of-class, target-location)
+
+React.render(element, document.body);
+
+</script>
