@@ -35,21 +35,35 @@
   });
 
   var ThumbnailList = React.createClass({
-    render: function() {
-      var list = this.props.thumbnailData.map(function(thumbnailProps){
-        return <Thumbnail {...thumbnailProps} />
-      });
-
+    render: function(){
+        var list = this.props.thumbnailData.map(function(thumbnailProps){
+          return <Thumbnail {...thumbnailProps} />
+        });
       return <div>
-        {list}
+      {list}
       </div>
     }
   });
 
+
+  // var ThumbnailList = React.createClass({
+  //   render: function() {
+  //     var list = this.props.thumbnailData.map(function(thumbnailProps){
+  //       return <Thumbnail {...thumbnailProps} />
+  //     });
+  //
+  //     return <div>
+  //       {list}
+  //     </div>
+  //   }
+  // });
+
+  //passing into options an object that has an array of objects itself
+  // var options = thumnailData [{ }, { }, { }];
   var options = {
     thumbnailData:  [{
       title: 'Show Courses',
-      number: 12,
+      number: 15,
       header: 'Learn React',
       description: 'React is a fantastic new front end library for rendering web pages. React is a fantastic new front end library for rendering web pages.',
       imageUrl: 'https://raw.githubusercontent.com/wiki/facebook/react/react-logo-1000-transparent.png'
