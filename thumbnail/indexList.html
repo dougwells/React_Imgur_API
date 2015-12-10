@@ -26,31 +26,14 @@
             <h3>{this.props.header}</h3>
             <p>{this.props.description}</p>
             <p>
-              <Badge title={this.props.title} number={this.props.number} />
+              <Badge {...this.props} />
+              // <Badge title={this.props.title} number={this.props.number} />
             </p>
           </div>
         </div>
       </div>
     }
   });
-
-  /* instead of this map code....
-  var list = this.props.thumbnailData.map(function(thumbnailProps){
-  	 return <Thumbnail {...thumbnailProps} />
-  });
-  */
-
-  //whats a good way to build the ThumbnaiList if using simple a for loop?
-  // var list = [];
-  // for( var i=0; i < this.props.thumbnailData.length; i++ ){
-  //     var thumbnailObj = this.props.thumbnailData[i];
-  //     list.push(<Thumbnail {...thumbnailObj} />)
-  // }
-  //
-  // return <div>
-  // 	{list}
-  // </div>
-  //
 
   var ThumbnailList = React.createClass({
     render: function(){
@@ -59,9 +42,12 @@
         var thumbnailObj = this.props.thumbnailData[i];
         list.push(<Thumbnail {...thumbnailObj} />);
       }
-        return <div>
-        {list}
-        </div>
+      console.log(list);
+        for(var j=0; j<2; j++){
+          return <div>
+              {list}
+            </div>
+          }
       }
   });
 
