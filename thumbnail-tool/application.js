@@ -25,6 +25,8 @@ var Badge = React.createClass({displayName: "Badge",
   }
 });
 
+var Thumbnail = require('thumbnail')
+
 var ThumbnailList = React.createClass({displayName: "ThumbnailList",
   render: function(){
       var list = this.props.thumbnailData.map(function(thumbnailProps){
