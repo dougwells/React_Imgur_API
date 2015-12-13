@@ -19,7 +19,10 @@ module.exports=React.createClass({
   },
 
   handleItemClick: function(param){
-    return console.log(param)
+    this.setState({
+      open: !this.state.open,
+      selItem: param
+    });
   },
 
   render: function(){
@@ -27,16 +30,15 @@ module.exports=React.createClass({
       return <ListItem
         oneItem={arrayItem}
         whenItemClicked={this.handleItemClick}
+        className = {this.state.selItem === arrayItem ? "active":""}
         />
-    });
+    }.bind(this));
 
     return <div className='dropdown'>
       <Button
         className={this.props.className}
         whenClicked={this.handleClick}
-        title={this.props.title}
-        subTitleClassName='caret'
-        subTitle = "29"
+        title={this.state.selItem || this.props.title}
       />
     <ul className={"dropdown-menu "+(this.state.open ? "show":"")}>
       {list}

@@ -5,6 +5,7 @@ module.exports = React.createClass({
     this.props.whenItemClicked(this.props.oneItem);
   },
   render: function() {
-    return <li><a onClick={this.handleClick}>{this.props.oneItem}</a></li>
+    return <li className={this.props.className}>
+      <a onClick={this.handleClick}>{this.props.oneItem}</a></li>
   }
 });
