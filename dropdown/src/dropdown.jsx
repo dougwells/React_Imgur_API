@@ -1,43 +1,49 @@
-// We need to show a button and a list
-// This component should know when to show the list
-// based on when the user clicks on a button
+//We need to show a button and a list.  This component should remember whether
+//to show list or not based on last state of component
+
 
 var React = require('react');
 var Button = require('./button');
 var ListItem = require('./list-item');
+// var arr = [<li>Savs</li>, <li>Sierra</li>];
 
-module.exports = React.createClass({
-  handleClick: function() {
+
+
+module.exports=React.createClass({
+  handleClick: function(){    //changes state when clicked
     this.setState({open: !this.state.open});
   },
-  getInitialState: function(){
-    return { open: false }
+
+  getInitialState: function(){  //sets initial state
+    return {open: false}
   },
-  handleItemClick: function(item) {
+
+  handleItemClick: function(param){
     this.setState({
-      open: false,
-      itemTitle: item
+      open: !this.state.open,
+      selItem: param
     });
   },
-  render: function() {
-    var list = this.props.items.map(function(item){
+
+  render: function(){
+    var list = this.props.items.map(function(arrayItem){
       return <ListItem
-              item={item}
-              whenItemClicked={this.handleItemClick}
-              className={this.state.itemTitle === item ? "active" : "" }
-              />
+        oneItem={arrayItem}
+        whenItemClicked={this.handleItemClick}
+        className = {this.state.selItem === arrayItem ? "active":""}
+        />
     }.bind(this));
 
-    return <div className="dropdown">
+    return <div className='dropdown'>
       <Button
+        className={this.props.className}
         whenClicked={this.handleClick}
-        className="btn-default"
-        title={this.state.itemTitle || this.props.title}
-        subTitleClassName="caret"
-        />
-      <ul className={"dropdown-menu " + (this.state.open ? "show" : "") }>
-        {list}
-      </ul>
+        title={this.state.selItem || this.props.title}
+      />
+    <ul className={"dropdown-menu "+(this.state.open ? "show":"")}>
+      {list}
+    </ul>
     </div>
   }
+
 });
