@@ -14,10 +14,11 @@ module.exports = React.createClass({
     return { open: false }
   },
   handleItemClick: function(item) {
-    this.setState({
-      open: false,
-      itemTitle: item
-    });
+    return console.log(item);
+    // this.setState({
+    //   open: false,
+    //   itemTitle: item
+    // });
   },
   render: function() {
     var list = this.props.items.map(function(item){
