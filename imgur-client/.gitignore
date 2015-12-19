@@ -1,4 +1,4 @@
 node_modules/
 main.js
 style.css
-./src/utils/api.jsx
+src/utils/secret.jsx
