@@ -12,7 +12,6 @@ module.exports = (
   <Router history={new HashHistory} >
 
     <Route path='/' component= {Main}>
-
     </Route>
 
   </Router>
