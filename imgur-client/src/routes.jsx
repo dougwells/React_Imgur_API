@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactRouter = require('react-router'); //actual react router library
-var HashHistory = require('react-router/lib/hashhistory'); //how React keeps track of 'page' user is on
+var HashHistory = require('react-router/lib/HashHistory'); //how React keeps track of 'page' user is on
 var Main = require('./components/main');
 
 var Router = ReactRouter.Router; //actual router deciding what content to show on page at any given time
