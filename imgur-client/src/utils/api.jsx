@@ -24,7 +24,7 @@ module.exports = window.api = {
 //note that the 2nd .then is "attached" to the 1st. Runs after 1st complete
       .then(function(response){
         return response.json()
-      })
+      });
       // .then(function(data){
       //   console.log(data);
       // });

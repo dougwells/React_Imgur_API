@@ -1,5 +1,5 @@
 var React = require('react');
-var Api = require('../utils/api');
+var TopicStore = require('../stores/topic-store');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -7,24 +7,24 @@ module.exports = React.createClass({
       topics: []
     }
   },
-//always put cWM just b4 component is rendered ...
-//"data" is simply a param. Refers to the one object from imgur
-//that lists default topics.  That object has one property named
-// data as well. This property is an array w/10 objects in it.
-//thus, data.data[0].name = "Star Wars"
+//getTopics is a method we coded for TopicStore.
+//Returns an object that has one property called "data"
+//{data: Array[10]}.  data is an array w/10 objects in it.
+//thus, this.state.topics[0].name = "Star Wars"
   componentWillMount: function(){
-    Api.get('topics/defaults')
-    .then (function(data){
-      // console.log(data.data); //array w/10 objects describ topics
-         this.setState({
-           topics: data.data
-         });
-        // console.log(this.state.topics);
+    TopicStore.getTopics()
+      .then(function(){
+//runs when data is fetched.  Data avail @ TopicStore.topics
+      this.setState({
+        topics: TopicStore.topics
+      });
     }.bind(this));
 
-  },
+      },
   //run .bind(this) since function above calls "this" (this.setState)
   //need to be sure function knows which "this" so use .bind(this)
+
+  //
 
   render: function(){
     return <div className="list-group">
@@ -34,6 +34,7 @@ module.exports = React.createClass({
   },
 
   renderTopics: function(){
+    console.log(this.state.topics);
     return this.state.topics.map(function(topic){
       return <li>{topic.name}</li>
     }
