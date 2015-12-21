@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var TopicStore = require('../stores/topic-store');
+var Actions = require('../actions');
 
 module.exports = React.createClass({
 //Listen to TopicStore.  When it triggers any event,
@@ -13,12 +14,9 @@ module.exports = React.createClass({
       topics: []
     }
   },
-//getTopics is a method we coded for TopicStore.
-//Returns an object that has one property called "data"
-//{data: Array[10]}.  data is an array w/10 objects in it.
-//thus, this.state.topics[0].name = "Star Wars"
+//swapped out TopicStore.getTopics() for
   componentWillMount: function(){
-    TopicStore.getTopics();
+    Actions.getTopics();
       },
   //run .bind(this) since function above calls "this" (this.setState)
   //need to be sure function knows which "this" so use .bind(this)
