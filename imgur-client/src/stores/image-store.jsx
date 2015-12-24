@@ -1,6 +1,7 @@
 var Api=require('../utils/api');
 var Reflux = require('reflux');
 var Actions = require('../actions');
+var _ = require('lodash');
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
@@ -8,7 +9,13 @@ module.exports = Reflux.createStore({
   getImages: function(topicId){
     return Api.get('topics/'+topicId)
     .then (function(json){
-      this.images = json.data;
+
+//lodash - rejects imgur albums (imgur gives them prop .is_album)
+//for every image, reject those w/image.is_album is true
+//not return image.is_album returns boolean
+      this.images = _.reject(json.data, function(image){
+        return image.is_album
+      });
       this.triggerChange();
     }.bind(this));
   },
