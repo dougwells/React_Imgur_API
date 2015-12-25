@@ -7,14 +7,17 @@ module.exports = React.createClass({
       hovering: false
     }
   },
+//play video on mouseover if animated.  Imgur gives property animated
+//see all imgur image properties at http://api.imgur.com/endpoints/gallery
+//note tertiary to decide this.video or this.image
   render: function(){
-// ?? why just this.image???  B/C it is a helper function below
     return <div
       className="image-preview"
       onMouseEnter= {this.handleMouseEnter}
       onMouseLeave={this.handleMouseLeave}
       >
       {this.props.animated && this.state.hovering ? this.video() : this.image() }
+      {this.props.animated && !this.state.hovering ? this.icon() : null }
     </div>
   },
 
@@ -24,6 +27,8 @@ module.exports = React.createClass({
     var link='http://i.imgur.com/'+this.props.id+'h.jpeg';
     return <img src={link} />
   },
+
+//<video> is simply HTML5 tag
   video: function(){
     return <div>
       <video preload="auto" autoPlay="autoPlay" loop="loop" webkit-plays-inline>
@@ -31,6 +36,11 @@ module.exports = React.createClass({
       </video>
     </div>
   },
+  icon: function(){
+    return <span className="glyphicon glyphicon-play-circle"></span>
+
+  },
+
   handleMouseEnter: function(){
     this.setState({hovering:true})
   },
