@@ -4,7 +4,7 @@ module.exports = React.createClass({
 
   render: function(){
 // ?? why just this.image???
-    return <div>
+    return <div className="image-preview">
       {this.image()}
     </div>
   },
