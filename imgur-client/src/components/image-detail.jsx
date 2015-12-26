@@ -7,7 +7,7 @@ var ImageStore = require('../stores/image-store');
 
 module.exports = React.createClass({
     mixins: [
-      Reflux.listenTo(ImageStore,'onChange')
+      Reflux.listenTo(ImageStore,'onChange2')
     ],
 
     getInitialState: function(){
@@ -39,14 +39,7 @@ module.exports = React.createClass({
     return <img src={imageURL} />
     },
 
-
-
-    // Actions.getImage('oqC1TjI')
-    // var imageLink='https://api.imgur.com/3/gallery/image/oqC1TjI';
-    // return <img src={imageLink} />
-    // },
-
-    onChange: function(event, image){
+    onChange2: function(event, image){
       this.setState({image: image});
     }
 });
