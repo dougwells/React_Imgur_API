@@ -18,6 +18,7 @@ module.exports = React.createClass({
       >
       {this.props.animated && this.state.hovering ? this.video() : this.image() }
       {this.props.animated && !this.state.hovering ? this.icon() : null }
+      {this.state.hovering ? this.inset() : null}
     </div>
   },
 
@@ -29,6 +30,15 @@ module.exports = React.createClass({
   },
 
 //<video> is simply HTML5 tag
+
+inset: function(){
+  return <div className="inset">
+    Views: {this.props.views}
+    <br />
+    Upvotes: {this.props.ups}
+  </div>
+},
+
   video: function(){
     return <div>
       <video preload="auto" autoPlay="autoPlay" loop="loop" webkit-plays-inline>
@@ -38,7 +48,6 @@ module.exports = React.createClass({
   },
   icon: function(){
     return <span className="glyphicon glyphicon-play-circle"></span>
-
   },
 
   handleMouseEnter: function(){
