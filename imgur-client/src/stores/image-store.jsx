@@ -48,6 +48,16 @@ module.exports = Reflux.createStore({
     this.trigger('change1', this.images);
   },
 
+  find: function(id){
+    var image=_.findWhere(this.images, {id:id});
+    if(image){
+      return image
+    }else{
+      this.getImage(id);
+      return null
+    }
+  },
+
   triggerImageChange: function(){
     this.trigger('change2', this.image);
   }
