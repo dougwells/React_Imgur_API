@@ -9,6 +9,7 @@ module.exports = Reflux.createStore({
   getImages: function(topicId){
     return Api.get('topics/'+topicId)
     .then (function(json){
+      console.log(json);
 
 //lodash - rejects imgur albums (imgur gives them prop .is_album)
 //for every image, reject those w/image.is_album is true
@@ -17,6 +18,15 @@ module.exports = Reflux.createStore({
         return image.is_album
       });
       this.triggerChange();
+    }.bind(this));
+  },
+
+//getImage returns an Object called "data"
+  getImage: function(imageId){
+    return Api.get('image/' +imageId)
+    .then(function(json){
+      console.log(json);
+      this.image = json.data;
     }.bind(this));
   },
 

@@ -6,6 +6,7 @@ var Reflux = require('reflux');
 //call any of Actions properties/methods via Actions.xx
 module.exports = Reflux.createActions([
   'getTopics',
-  'getImages'
+  'getImages',
+  'getImage'
 
 ]);
