@@ -41,9 +41,6 @@ module.exports = React.createClass({
             <div className='panel-footer'>
               <h5>{this.state.image.description}</h5>
             </div>
-            <div className='panel-footer'>
-              <h5>{this.renderComments()}</h5>
-            </div>
           </div>
         </div>
     },
@@ -59,12 +56,12 @@ module.exports = React.createClass({
       }
     },
 
-    renderComments: function(){
-      console.log(this.state.image.comment_preview);
-      return this.state.image.comment_preview.map(function(comment){
-        return <h5>{comment.comment}</h5>
-      });
-    },
+    // renderComments: function(){
+    //   console.log(this.state.image.comment_preview);
+    //   return this.state.image.comment_preview.map(function(comment){
+    //     return <h5>{comment.comment}</h5>
+    //   });
+    // },
 
     onChangeOne: function(){
       console.log('onChange1');
