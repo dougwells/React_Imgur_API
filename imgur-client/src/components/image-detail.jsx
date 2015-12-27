@@ -7,39 +7,41 @@ var ImageStore = require('../stores/image-store');
 
 module.exports = React.createClass({
     mixins: [
-      Reflux.listenTo(ImageStore,'onChange2')
+      Reflux.listenTo(ImageStore,'onChangeOne'),
+      Reflux.listenTo(ImageStore,'onChangeTwo'),
     ],
 
     getInitialState: function(){
       return {
-        image: {}
+        image: null
       }
     },
 
   componentWillMount: function(){
-    ImageStore.getImage(this.props.params.id)
-    .then(function(){
-//runs when data is fetched.  Data avail @ ImageStore.image
-      this.setState({
-        image: ImageStore.image
-      });
-    }.bind(this));
-    },
+    console.log('componentWillMount ran');
+    Actions.getImage(this.props.params.id)
+  },
 
   render: function(){
+    console.log('image-detail component rendered');
+    console.log(this.state.image);
     return <div>
-      Image detail
-      {this.renderImage()}
-
+      {this.state.image}
     </div>
   },
 
-  renderImage: function(id){
-    var imageURL = this.state.image.link;
-    return <img src={imageURL} />
+
+    onChangeOne: function(){
+      console.log('onChange1');
+      this.setState({
+        image: ImageStore.find(this.props.params.id)
+      });
     },
 
-    onChange2: function(event, image){
-      this.setState({image: image});
+    onChangeTwo: function(){
+      console.log('onChange2');
+      this.setState({
+        image: ImageStore.find(this.props.params.id)
+      });
     }
 });

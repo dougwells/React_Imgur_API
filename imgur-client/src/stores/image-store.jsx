@@ -23,7 +23,7 @@ module.exports = Reflux.createStore({
       this.images = _.reject(json.data, function(image){
         return image.is_album
       });
-      this.triggerChange();
+      this.triggerChangeOne();
     }.bind(this));
   },
 
@@ -36,16 +36,31 @@ module.exports = Reflux.createStore({
 //"this" refers to the variable that gets assigned via require/module.exports
 
   getImage: function(imageId){
-    return Api.get('image/' +imageId)
+    return Api.get('gallery/image/' +imageId)
     .then(function(json){
-      console.log(json);
-      this.image = json.data;
-      this.triggerImageChange();
+      if(this.images){
+        console.log('this.images true')
+        this.images.push(json.data);
+        console.log(this.images);
+      }else{
+//make this.image an array so that Lodash methods work ...
+        this.images = [json.data];
+        console.log('this.images false')
+        console.log(this.images);
+      }
+      this.triggerChangeTwo();
+
     }.bind(this));
   },
 
-  triggerChange: function(){
-    this.trigger('change1', this.images);
+  triggerChangeOne: function(){
+    console.log('triggerChange1');
+    this.trigger('changeOne', this.images);
+  },
+
+  triggerChangeTwo: function(){
+    console.log('triggerChange2')
+    this.trigger('changeTwo', this.images);
   },
 
   find: function(id){
@@ -56,9 +71,5 @@ module.exports = Reflux.createStore({
       this.getImage(id);
       return null
     }
-  },
-
-  triggerImageChange: function(){
-    this.trigger('change2', this.image);
   }
 });

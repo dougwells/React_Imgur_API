@@ -7,8 +7,10 @@ var Link = ReactRouter.Link;
 var ImagePreview = require('./image-preview');
 
 module.exports = React.createClass({
+//listen for "Change1" from ImageStore to be emitted.
+//if emmitted, run onChange1 below (update state.images)
   mixins: [
-    Reflux.listenTo(ImageStore,'onChange')
+    Reflux.listenTo(ImageStore,'onChangeOne')
   ],
 
   getInitialState: function(){
@@ -20,7 +22,7 @@ module.exports = React.createClass({
 //Renders just b4 component mounts.  Challenge is ReactRouter
 //is smart and only re-renders when this would be a "new" component
 //IE, does NOT reload on state change if same component (new topic)
-//We do not need to re-load the component (still topic)
+//We do not need to re-load the component (still same topic)
 //BUT, we do need to update it's properties.  Thus cWRP below
   componentWillMount: function(){
     Actions.getImages(this.props.params.id);
@@ -49,7 +51,8 @@ module.exports = React.createClass({
 
   },
 
-  onChange: function(event, images){
+  onChangeOne: function(event, images){
+    console.log('topic.jsx ran onChangeOne')
     this.setState({images: images});
   }
 });
