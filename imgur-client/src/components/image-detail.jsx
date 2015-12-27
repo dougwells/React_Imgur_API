@@ -25,11 +25,36 @@ module.exports = React.createClass({
   render: function(){
     console.log('image-detail component rendered');
     console.log(this.state.image);
-    return <div>
-      {this.state.image}
+    return <div className="image-detail">
+      {this.state.image ? this.renderContent() : null}
     </div>
   },
+    renderContent: function(){
+      return <div>
+          <div className='panel panel-default'>
+            <div className='panel-heading'>
+              <h4>{this.state.image.title}</h4>
+            </div>
+            <div className="panel-body">
+              {this.renderImage()}
+            </div>
+            <div className='panel-footer'>
+              <h5>{this.state.image.description}</h5>
+            </div>
+          </div>
+        </div>
+    },
 
+    renderImage: function(){
+      var imageLink = this.state.image.link
+      if(!this.state.image.animated){
+      return <img src={imageLink} />
+      }else {
+        return <video preload='auto' autoPlay='autoplay' loop='loop' webkit-plays-inline>
+          <source src={this.state.image.mp4} type='video/mp4'></source>
+        </video>
+      }
+    },
 
     onChangeOne: function(){
       console.log('onChange1');
