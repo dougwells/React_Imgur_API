@@ -3,17 +3,21 @@ var ReactRouter = require('react-router');
 var Actions = require('../actions');
 var Link = ReactRouter.Link;
 var Reflux = require('reflux');
+var CommentStore = require('../stores/comment-store');
 var ImageStore = require('../stores/image-store');
+var CommentBox = require('./comment-box');
 
 module.exports = React.createClass({
     mixins: [
-      Reflux.listenTo(ImageStore,'onChangeOne'),
-      Reflux.listenTo(ImageStore,'onChangeTwo'),
+      Reflux.listenTo(ImageStore,'onChange'),
+      Reflux.listenTo(CommentStore,'onChange'),
+
     ],
 
     getInitialState: function(){
       return {
-        image: null
+        image: null,
+        comment: null
       }
     },
 
@@ -42,6 +46,8 @@ module.exports = React.createClass({
               <h5>{this.state.image.description}</h5>
             </div>
           </div>
+          <h3>Comments</h3>
+          {this.renderComments()}
         </div>
     },
 
@@ -56,24 +62,22 @@ module.exports = React.createClass({
       }
     },
 
-    // renderComments: function(){
-    //   console.log(this.state.image.comment_preview);
-    //   return this.state.image.comment_preview.map(function(comment){
-    //     return <h5>{comment.comment}</h5>
-    //   });
-    // },
-
-    onChangeOne: function(){
-      console.log('onChange1');
-      this.setState({
-        image: ImageStore.find(this.props.params.id)
-      });
+    renderComments: function(){
+      if(!this.state.comments){
+        console.log('commentBox not run');
+        return null
+      }else {
+        console.log("commentBox ran");
+        return <CommentBox comments={this.state.comments} />
+      }
     },
 
-    onChangeTwo: function(){
-      console.log('onChange2');
+    onChange: function(){
+      console.log('ran image-detail onChange');
       this.setState({
-        image: ImageStore.find(this.props.params.id)
+        image: ImageStore.find(this.props.params.id),
+        comments: CommentStore.comment
+
       });
     }
 });

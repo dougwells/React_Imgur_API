@@ -12,7 +12,7 @@ module.exports = Reflux.createStore({
 //want same name so that when image-detail component mounts,
 //calls both getImage for image & for comments
   getImage: function(id){
-    return Api.get('gallery/' +id+'comments/')
+    return Api.get('gallery/' +id+'/comments/')
       .then (function(json){
         console.log('comments retrieved from Imgur')
         console.log(json);
@@ -21,6 +21,7 @@ module.exports = Reflux.createStore({
       }.bind(this));
     },
     triggerChange: function(){
+      console.log(this.comment);
       this.trigger('change', this.comment);
     },
 });

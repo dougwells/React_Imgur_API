@@ -23,7 +23,7 @@ module.exports = Reflux.createStore({
       this.images = _.reject(json.data, function(image){
         return image.is_album
       });
-      this.triggerChangeOne();
+      this.triggerChange();
     }.bind(this));
   },
 
@@ -48,20 +48,16 @@ module.exports = Reflux.createStore({
         console.log('this.images false')
         console.log(this.images);
       }
-      this.triggerChangeTwo();
+      this.triggerChange();
 
     }.bind(this));
   },
 
-  triggerChangeOne: function(){
-    console.log('triggerChange1');
-    this.trigger('changeOne', this.images);
+  triggerChange: function(){
+    console.log('ImageStore triggerChange');
+    this.trigger('change', this.images);
   },
 
-  triggerChangeTwo: function(){
-    console.log('triggerChange2')
-    this.trigger('changeTwo', this.images);
-  },
 
   find: function(id){
     var image=_.findWhere(this.images, {id:id});
