@@ -1,7 +1,7 @@
 var Api=require('../utils/api');
 var Reflux = require('reflux');
 var Actions = require('../actions');
-var _ = require('lodash');
+var _  =  require('lodash');
 
 //listenables tells image-store to run any of its function called via Actions
 module.exports = Reflux.createStore({
